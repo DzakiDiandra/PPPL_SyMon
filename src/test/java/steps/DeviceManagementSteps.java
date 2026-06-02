@@ -2,6 +2,7 @@ package steps;
 
 import io.cucumber.java.Before;
 import io.cucumber.java.en.*;
+import org.example.pages.DashboardPage;
 import org.example.pages.LoginPage;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -12,6 +13,7 @@ import java.util.Arrays;
 public class DeviceManagementSteps {
     WebDriver driver;
     LoginPage loginPage;
+    DashboardPage dashboardPage;
     @Before("@device")
     public void setDriver(){
         ChromeOptions options = new ChromeOptions();
@@ -48,7 +50,7 @@ public class DeviceManagementSteps {
 
     @Given("pengguna berada di halaman Devices")
     public void penggunaBeradaDiHalamanDevices() {
-        // TODO
+
     }
 
     @Given("pengguna membuka halaman detail device {string}")
