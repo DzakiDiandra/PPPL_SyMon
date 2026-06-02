@@ -9,7 +9,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import java.time.Duration;
 
 public class SymonBasePage {
-    WebDriver driver;
+    public WebDriver driver;
     WebDriverWait wait;
     public SymonBasePage(WebDriver driver){
         this.driver = driver;

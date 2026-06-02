@@ -5,13 +5,26 @@ import io.cucumber.java.en.*;
 import org.example.pages.LoginPage;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
+
+import java.util.Arrays;
 
 public class DeviceManagementSteps {
     WebDriver driver;
     LoginPage loginPage;
     @Before("@device")
     public void setDriver(){
-        driver = new ChromeDriver();
+        ChromeOptions options = new ChromeOptions();
+        options.addArguments("--guest");
+//        options.addArguments("--disable-sync");
+//        options.addArguments("--disable-signin-promo");
+//        options.addArguments("--disable-features=ChromeWhatsNewUI");
+//
+//        options.setExperimentalOption(
+//                "excludeSwitches",
+//                Arrays.asList("enable-automation")
+//        );
+        driver = new ChromeDriver(options);
         driver.manage().window().maximize();
         driver.get("https://si-mondhog.m-faizarrofi.workers.dev/");
     }

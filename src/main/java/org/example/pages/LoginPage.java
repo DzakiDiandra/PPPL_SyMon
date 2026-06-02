@@ -37,6 +37,12 @@ public class LoginPage extends SymonBasePage {
     }
 
     public void lanjutkanButton() throws InterruptedException{
+        System.out.println(driver.getCurrentUrl());
         click(LoginLocator.ContinueButton);
+    }
+
+    public void lanjutkanButton2() throws InterruptedException {
+        System.out.println(driver.getCurrentUrl());
+        click(LoginLocator.ContinueButton2);
     }
 }
