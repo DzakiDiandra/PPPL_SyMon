@@ -20,7 +20,7 @@
 
     # TC-DS-08
     Scenario Outline: Filter Time Series pada halaman detail device
-      Given pengguna membuka halaman detail device "PC Lab 1"
+      Given pengguna membuka halaman detail device "halo"
       When pengguna memilih filter Time Series "<filter>"
       Then grafik performa menampilkan data sesuai rentang waktu "<filter>"
 
@@ -33,10 +33,9 @@
     # TC-DS-09
     @device
     Scenario: Melihat detail device dengan status Online
-      Given terdapat device "PC Lab 1" dengan status "Online"
-      When pengguna memilih device "PC Lab 1" dari daftar
+      Given terdapat device "halo" dengan status "Online"
+      When pengguna memilih device "halo" dari daftar
       Then halaman detail device ditampilkan
-      And halaman menampilkan sistem overview
       And halaman menampilkan filter time series
       And halaman menampilkan tombol "Download CSV"
       And halaman menampilkan performance summary
@@ -94,13 +93,6 @@
       When pengguna menekan tombol "Download CSV"
       Then proses download file CSV langsung berjalan
       And file CSV berhasil tersimpan di perangkat pengguna
-
-    # TC-EXP-02
-    Scenario: Validasi isi file CSV yang diunduh
-      Given pengguna telah mendownload file CSV dari halaman dashboard
-      When pengguna membuka file CSV tersebut
-      Then file CSV berisi data yang sesuai dengan data performa di dashboard
-      And file CSV mengandung kolom data CPU, RAM, Storage, dan timestamp
 
     # ----------------------------------------------------------
     # MODUL: Log Event

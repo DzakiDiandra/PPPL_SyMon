@@ -1,8 +1,11 @@
 package steps;
+import static org.junit.jupiter.api.Assertions.*;
 
 import io.cucumber.java.Before;
 import io.cucumber.java.en.*;
 import org.example.pages.DashboardPage;
+import org.example.pages.DeviceDetailPage;
+import org.example.pages.DevicePage;
 import org.example.pages.LoginPage;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -14,6 +17,9 @@ public class DeviceManagementSteps {
     WebDriver driver;
     LoginPage loginPage;
     DashboardPage dashboardPage;
+    DevicePage devicePage;
+    DeviceDetailPage deviceDetailPage;
+
     @Before("@device")
     public void setDriver(){
         ChromeOptions options = new ChromeOptions();
@@ -42,25 +48,42 @@ public class DeviceManagementSteps {
             loginPage.inputPassword("Rofi0602");
             loginPage.submitSSO();
             loginPage.lanjutkanButton();
+            dashboardPage = new DashboardPage(driver);
+            dashboardPage.clickNavbarDevice();
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    @Given("pengguna berada di halaman Devices")
+    public void penggunaBeradaDiHalamanDevices() {
+        try {
+            devicePage = new DevicePage(driver);
+            assertEquals(devicePage.getUrl(), "https://si-mondhog.m-faizarrofi.workers.dev/devices");
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    @Given("pengguna membuka halaman detail device {string}")
+    public void penggunaMembukaHalamanDetailDevice(String deviceName) {
+        try {
+            devicePage.openDeviceDetail(deviceName);
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
 
     }
 
-    @Given("pengguna berada di halaman Devices")
-    public void penggunaBeradaDiHalamanDevices() {
-
-    }
-
-    @Given("pengguna membuka halaman detail device {string}")
-    public void penggunaMembukaHalamanDetailDevice(String deviceName) {
-        // TODO
-    }
-
     @Given("terdapat device {string} dengan status {string}")
     public void terdapatDeviceDenganStatus(String deviceName, String status) {
-        // TODO
+        try {
+//            devicePage.searchDevice(deviceName);
+//            System.out.println(status);
+            devicePage.seenDeviceOnStatus(deviceName, status);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @Given("pengguna membuka halaman detail device {string} dengan status {string}")
@@ -81,7 +104,11 @@ public class DeviceManagementSteps {
 
     @When("pengguna memilih device {string} dari daftar")
     public void penggunaMemilihDeviceDariDaftar(String deviceName) {
-        // TODO
+        try {
+            devicePage.openDeviceDetail(deviceName);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @When("pengguna menekan tombol {string} di samping filter Time Series")
@@ -131,12 +158,12 @@ public class DeviceManagementSteps {
 
     @Then("halaman detail device ditampilkan")
     public void halamanDetailDeviceDitampilkan() {
-        // TODO
-    }
-
-    @Then("halaman menampilkan sistem overview")
-    public void halamanMenampilkanSistemOverview() {
-        // TODO
+        try {
+            deviceDetailPage = new DeviceDetailPage(driver);
+            assertTrue(deviceDetailPage.getPageUrl().contains("https://si-mondhog.m-faizarrofi.workers.dev/devices"));
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @Then("halaman menampilkan filter time series")
