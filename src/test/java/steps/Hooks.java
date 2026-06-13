@@ -13,36 +13,48 @@ public class Hooks {
 
     @Before
     public void setup() {
-        WebDriverManager.chromedriver().setup();
-        
-        ChromeOptions options = new ChromeOptions();
-        
-        // Check if we should run headless (default: false untuk manual testing)
-        // Set environment variable HEADLESS=true untuk run headless
-        String headlessMode = System.getenv("HEADLESS");
-        if (headlessMode == null || headlessMode.isEmpty()) {
-            headlessMode = "false"; // Default: visible browser
+        if (driver == null) {
+            WebDriverManager.chromedriver().setup();
+            
+            ChromeOptions options = new ChromeOptions();
+            
+            // Check if we should run headless (default: false untuk manual testing)
+            // Set environment variable HEADLESS=true untuk run headless
+            String headlessMode = System.getenv("HEADLESS");
+            if (headlessMode == null || headlessMode.isEmpty()) {
+                headlessMode = "false"; // Default: visible browser
+            }
+            
+            if (headlessMode.equals("true")) {
+                options.addArguments("--headless=new");
+                options.addArguments("--no-sandbox");
+                options.addArguments("--disable-dev-shm-usage");
+            }
+            
+            // Disable notifications dan popups
+            options.addArguments("--disable-notifications");
+            options.addArguments("--disable-popup-blocking");
+            options.addArguments("--guest");
+            
+            driver = new ChromeDriver(options);
+            driver.manage().window().maximize();
+
+            // Register a shutdown hook to close the driver when the JVM exits (tests are finished)
+            Runtime.getRuntime().addShutdownHook(new Thread(() -> {
+                if (driver != null) {
+                    try {
+                        driver.quit();
+                    } catch (Exception e) {
+                        // Ignore
+                    }
+                }
+            }));
         }
-        
-        if (headlessMode.equals("true")) {
-            options.addArguments("--headless=new");
-            options.addArguments("--no-sandbox");
-            options.addArguments("--disable-dev-shm-usage");
-        }
-        
-        // Disable notifications dan popups
-        options.addArguments("--disable-notifications");
-        options.addArguments("--disable-popup-blocking");
-        
-        driver = new ChromeDriver(options);
-        driver.manage().window().maximize();
     }
 
     @After
     public void teardown() {
-        if (driver != null) {
-            driver.quit();
-        }
+        // Do not quit driver here to preserve session across scenarios
     }
 }
 
