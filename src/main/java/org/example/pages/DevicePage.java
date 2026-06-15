@@ -58,12 +58,6 @@ public class DevicePage extends SymonBasePage {
         ).isEmpty();
     }
 
-    public void seenDeviceName(String nama) throws InterruptedException{
-        By locator = By.xpath(
-                "//h3[normalize-space()='" + nama + "']"
-        );
-        waitForElement(locator);
-    }
 
     public String getUrl() throws InterruptedException{
         waitForElement(DevicesLocator.Header);

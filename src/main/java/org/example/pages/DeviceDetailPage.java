@@ -108,9 +108,6 @@ public class DeviceDetailPage extends SymonBasePage {
 
     public void clickEditButton()
             throws InterruptedException {
-//        scrollIntoView(
-//                DeviceDetailLocator.EditButton
-//        );
         wait.until(ExpectedConditions.elementToBeClickable(DeviceDetailLocator.EditButton));
         click(DeviceDetailLocator.EditButton);
     }
@@ -140,9 +137,6 @@ public class DeviceDetailPage extends SymonBasePage {
     }
     public void clickDeleteButton()
             throws InterruptedException {
-//        scrollIntoView(
-//                DeviceDetailLocator.ButtonDelete
-//        );
         wait.until(ExpectedConditions.elementToBeClickable(DeviceDetailLocator.ButtonDelete));
         click(DeviceDetailLocator.ButtonDelete);
     }
@@ -162,9 +156,7 @@ public class DeviceDetailPage extends SymonBasePage {
         Thread.sleep(Duration.ofSeconds(4));
         return wait.until(driver ->
                 driver.getCurrentUrl()
-                        .equals(
-                                "https://si-mondhog.m-faizarrofi.workers.dev/devices"
-                        )
+                        .equals("https://si-mondhog.m-faizarrofi.workers.dev/devices")
         );
     }
     public int getTotalDataPoints() {
@@ -173,51 +165,17 @@ public class DeviceDetailPage extends SymonBasePage {
                         DeviceDetailLocator.RAMChartLine
                 ).getAttribute("d");
 
-        System.out.println(path);
-
         return path.split("C").length;
     }
     public void selectTimeSeriesFilter(String filter)
             throws InterruptedException {
-
         Select dropdown =
                 new Select(
                         waitForElement(
                                 DeviceDetailLocator.TimeSeriesDropdown
                         )
                 );
-
         dropdown.selectByVisibleText(filter);
-
         Thread.sleep(2000);
-    }
-    public boolean validateFilterApplied(
-            String filter,
-            int totalPoint
-    ) {
-
-        switch (filter) {
-
-            case "1 Hours":
-                return totalPoint > 0;
-
-            case "12 Hours":
-                return totalPoint > 0;
-
-            case "1 Day":
-                return totalPoint > 0;
-
-            default:
-                return false;
-        }
-    }
-    public int getRamChartPointCount() {
-
-        String pathData =
-                driver.findElement(
-                        DeviceDetailLocator.RAMChartLine
-                ).getDomAttribute("d");
-
-        return pathData.split("L").length;
     }
 }
