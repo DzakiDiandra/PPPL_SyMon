@@ -26,6 +26,12 @@ public class DevicePage extends SymonBasePage {
         );
     }
 
+    public void openDashboardPage() throws InterruptedException {
+        waitForElement(DevicesLocator.DashboardNavbar);
+        click(DevicesLocator.DashboardNavbar);
+
+    }
+
     public void searchDevice(String nama)throws InterruptedException{
         WebElement search = driver.findElement(DevicesLocator.SearchBar);
         search.clear();
@@ -39,6 +45,17 @@ public class DevicePage extends SymonBasePage {
                         "//a/span[normalize-space()='" + status.toLowerCase() + "']"
         );
         waitForElement(locator);
+    }
+    public boolean isDeviceNotExist(
+            String deviceName) {
+
+        return driver.findElements(
+                By.xpath(
+                        "//h3[normalize-space()='"
+                                + deviceName +
+                                "']"
+                )
+        ).isEmpty();
     }
 
     public void seenDeviceName(String nama) throws InterruptedException{

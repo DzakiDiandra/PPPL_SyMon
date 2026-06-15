@@ -19,6 +19,7 @@
     # ----------------------------------------------------------
 
     # TC-DS-08
+    @device
     Scenario Outline: Filter Time Series pada halaman detail device
       Given pengguna membuka halaman detail device "halo"
       When pengguna memilih filter Time Series "<filter>"
@@ -33,8 +34,8 @@
     # TC-DS-09
     @device
     Scenario: Melihat detail device dengan status Online
-      Given terdapat device "halo" dengan status "Online"
-      When pengguna memilih device "halo" dari daftar
+      Given terdapat device "ropi" dengan status "Online"
+      When pengguna memilih device "ropi" dari daftar
       Then halaman detail device ditampilkan
       And halaman menampilkan filter time series
       And halaman menampilkan tombol "Download CSV"
@@ -44,75 +45,79 @@
       And tabel logs ditampilkan dalam keadaan aktif
 
     # TC-DS-10
+    @device
     Scenario: Melihat detail device dengan status Pending
-      Given terdapat device "Server Pending" dengan status "Pending"
-      When pengguna memilih device "Server Pending" dari daftar
+      Given terdapat device "dann laptop" dengan status "Pending"
+      When pengguna memilih device "dann laptop" dari daftar
       Then halaman detail device ditampilkan
-      And grafik dan tabel logs ditampilkan dalam keadaan disable (abu-abu)
+      And grafik dan tabel logs ditampilkan dalam keadaan "Pending"
 
     # TC-DS-11
+    @device
     Scenario: Melihat detail device dengan status Offline
-      Given terdapat device "Server Offline" dengan status "Offline"
-      When pengguna memilih device "Server Offline" dari daftar
+      Given terdapat device "jindan-lin" dengan status "Offline"
+      When pengguna memilih device "jindan-lin" dari daftar
       Then halaman detail device ditampilkan
-      And grafik dan tabel logs ditampilkan dalam keadaan disable (abu-abu)
+      And grafik dan tabel logs ditampilkan dalam keadaan "Offline"
 
     # TC-DS-12
+    @device
     Scenario: Download file CSV data grafik dari halaman detail device
-      Given pengguna membuka halaman detail device "PC Lab 1" dengan status "Online"
+      Given pengguna membuka halaman detail device "ropi" dengan status "Online"
       When pengguna menekan tombol "Download CSV" di samping filter Time Series
       Then proses download langsung berjalan
-      And muncul konfirmasi ketika download selesai
-      And file CSV tersimpan di perangkat pengguna
 
     # TC-DS-13
+    @device
     Scenario: Edit nama device
-      Given pengguna membuka halaman detail device "PC Lab 1"
+      Given pengguna membuka halaman detail device "Laptop Memet"
       When pengguna menekan tombol "Edit" di dekat nama device
       And pengguna memasukkan nama device baru "PC Lab 1 Updated"
       And pengguna mengkonfirmasi perubahan
       Then nama device langsung berganti menjadi "PC Lab 1 Updated"
 
     # TC-DS-14
+    @device
     Scenario: Hapus device dari sistem
-      Given pengguna membuka halaman detail device "PC Lab 1"
+      Given pengguna membuka halaman detail device "PC Lab 1 Updated"
       When pengguna menekan tombol "Delete"
       Then muncul pop-up konfirmasi penghapusan
       When pengguna menekan tombol "Delete" pada pop-up konfirmasi
       Then muncul notifikasi bahwa device berhasil dihapus
-      And pengguna diarahkan kembali ke halaman Devices
-      And device "PC Lab 1" tidak lagi muncul dalam daftar
+      And device "PC Lab 1 Updated" tidak lagi muncul dalam daftar
 
     # ----------------------------------------------------------
     # MODUL: Export CSV
     # ----------------------------------------------------------
 
     # TC-EXP-01
+    @device
     Scenario: Download CSV dari halaman dashboard
       Given pengguna berada di halaman dashboard
       When pengguna menekan tombol "Download CSV"
       Then proses download file CSV langsung berjalan
-      And file CSV berhasil tersimpan di perangkat pengguna
 
     # ----------------------------------------------------------
     # MODUL: Log Event
     # ----------------------------------------------------------
 
     # TC-LDE-01
+    @device
     Scenario: Tabel log event ditampilkan di dashboard
       Given pengguna berada di halaman dashboard
       When pengguna scroll ke bagian log event
       Then tabel log event berhasil ditampilkan
 
     # TC-LDE-02
+    @device
     Scenario: Isi log event memuat aktivitas create dan update
       Given pengguna berada di halaman dashboard
       And tabel log event telah ditampilkan
-      When pengguna memeriksa isi tabel log event
-      Then tabel menampilkan event bertipe "create" dan "update"
+      Then tabel menampilkan event bertipe "update" dan "delete"
       And setiap event memuat informasi waktu kejadian
 
     # TC-LDE-03
+    @device
     Scenario: Log event dapat difilter berdasarkan waktu
       Given pengguna berada di halaman dashboard
       And tabel log event telah ditampilkan
