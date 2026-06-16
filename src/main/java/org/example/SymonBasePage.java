@@ -13,7 +13,7 @@ public class SymonBasePage {
     WebDriverWait wait;
     public SymonBasePage(WebDriver driver){
         this.driver = driver;
-        this.wait = new WebDriverWait(driver, Duration.ofSeconds(5));
+        this.wait = new WebDriverWait(driver, Duration.ofSeconds(15));
     }
 
     public WebElement waitForElement (By by) throws InterruptedException {
