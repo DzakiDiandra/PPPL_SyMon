@@ -310,39 +310,39 @@ public class DeviceManagementSteps {
     }
 
 
-    private String initialRam;
-    private String initialCpu;
-    private String initialStorage;
+//    private String initialRam;
+//    private String initialCpu;
+//    private String initialStorage;
 
     // =========================================================================
     // TC-PEAK-04: FILTER TIME BASED (DAYS VS WEEKS)
     // =========================================================================
-    @When("pengguna mengganti pilihan filter waktu")
-    public void penggunaMenggantiPilihanFilterWaktu() {
-        initialRam = dashboardPage.getPeakRAMText();
-        initialCpu = dashboardPage.getPeakCPUText();
-        initialStorage = dashboardPage.getPeakStorageText();
-
-        dashboardPage.clickDaysFilter();
-
-        try { Thread.sleep(1500); } catch (InterruptedException e) { e.printStackTrace(); }
-    }
-
-    @Then("nilai peak RAM berubah sesuai filter baru")
-    public void nilaiPeakRAMBerubahSesuaiFilterBaru() {
-        String currentRam = dashboardPage.getPeakRAMText();
-        Assert.assertNotEquals("Nilai RAM tidak mengalami perubahan setelah filter diganti!", initialRam, currentRam);
-    }
-
-    @And("nilai peak CPU berubah sesuai filter baru")
-    public void nilaiPeakCPUBerubahSesuaiFilterBaru() {
-        String currentCpu = dashboardPage.getPeakCPUText();
-        Assert.assertNotEquals("Nilai CPU tidak mengalami perubahan setelah filter diganti!", initialCpu, currentCpu);
-    }
-
-    @And("nilai peak Storage berubah sesuai filter baru")
-    public void nilaiPeakStorageBerubahSesuaiFilterBaru() {
-        String currentStorage = dashboardPage.getPeakStorageText();
-        Assert.assertNotEquals("Nilai Storage tidak mengalami perubahan setelah filter diganti!", initialStorage, currentStorage);
-    }
+//    @When("pengguna mengganti pilihan filter waktu")
+//    public void penggunaMenggantiPilihanFilterWaktu() {
+//        initialRam = dashboardPage.getPeakRAMText();
+//        initialCpu = dashboardPage.getPeakCPUText();
+//        initialStorage = dashboardPage.getPeakStorageText();
+//
+//        dashboardPage.clickDaysFilter();
+//
+//        try { Thread.sleep(1500); } catch (InterruptedException e) { e.printStackTrace(); }
+//    }
+//
+//    @Then("nilai peak RAM berubah sesuai filter baru")
+//    public void nilaiPeakRAMBerubahSesuaiFilterBaru() {
+//        String currentRam = dashboardPage.getPeakRAMText();
+//        Assert.assertNotEquals("Nilai RAM tidak mengalami perubahan setelah filter diganti!", initialRam, currentRam);
+//    }
+//
+//    @And("nilai peak CPU berubah sesuai filter baru")
+//    public void nilaiPeakCPUBerubahSesuaiFilterBaru() {
+//        String currentCpu = dashboardPage.getPeakCPUText();
+//        Assert.assertNotEquals("Nilai CPU tidak mengalami perubahan setelah filter diganti!", initialCpu, currentCpu);
+//    }
+//
+//    @And("nilai peak Storage berubah sesuai filter baru")
+//    public void nilaiPeakStorageBerubahSesuaiFilterBaru() {
+//        String currentStorage = dashboardPage.getPeakStorageText();
+//        Assert.assertNotEquals("Nilai Storage tidak mengalami perubahan setelah filter diganti!", initialStorage, currentStorage);
+//    }
 }

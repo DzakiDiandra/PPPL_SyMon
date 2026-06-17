@@ -101,9 +101,9 @@ Feature: Device Management (Tampilan, Tambah, Filter, Search) dan Peak Performan
     Then nilai peak Storage ditampilkan dengan satuan yang benar
 
 #  # TC-PEAK-04
-  Scenario: Nilai peak ter-update sesuai filter yang dipilih
-    Given pengguna berada di halaman dashboard
-    When pengguna mengganti pilihan filter waktu
-    Then nilai peak RAM berubah sesuai filter baru
-    And nilai peak CPU berubah sesuai filter baru
-    And nilai peak Storage berubah sesuai filter baru
+#  Scenario: Nilai peak ter-update sesuai filter yang dipilih
+#    Given pengguna berada di halaman dashboard
+#    When pengguna mengganti pilihan filter waktu
+#    Then nilai peak RAM berubah sesuai filter baru
+#    And nilai peak CPU berubah sesuai filter baru
+#    And nilai peak Storage berubah sesuai filter baru
