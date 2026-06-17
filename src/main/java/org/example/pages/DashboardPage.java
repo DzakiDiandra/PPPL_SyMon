@@ -12,15 +12,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class DashboardPage {
-    private WebDriver driver;
-    private WebDriverWait wait;
+public class DashboardPage extends SymonBasePage {
 
     // Constructor
     public DashboardPage(WebDriver driver) {
-        this.driver = driver;
-        // Set explicit wait 10 detik biar ga gampang flaky pas nunggu elemen muncul
-        this.wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        super(driver);
     }
 
     // 1. When pengguna menekan tombol "Devices" di navbar
@@ -757,6 +753,7 @@ public class DashboardPage {
     public boolean isPeakStorageDisplayedWithUnit() {
         String val = getPeakStorageValue();
         return val != null && (val.contains("GB") || val.contains("MB") || val.contains("KB") || val.contains("%") || val.matches(".*\\d+.*"));
+    }
 
     public void clickNavbarDevice()throws InterruptedException{
         click(DashboardLocator.DeviceNavbar);

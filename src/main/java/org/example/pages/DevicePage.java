@@ -254,6 +254,7 @@ public class DevicePage extends SymonBasePage {
             // If message not found, maybe list size is 0
             return driver.findElements(deviceCards).isEmpty();
         }
+    }
     public void openDeviceDetail(String deviceName) throws InterruptedException {
         By locator = By.xpath(
                 "//h3[normalize-space()='" + deviceName + "']" +
