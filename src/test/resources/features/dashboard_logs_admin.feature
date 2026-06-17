@@ -8,7 +8,9 @@
 # Jumlah   : 10 TC
 # ============================================================
 
+@dashboard
 Feature: Dashboard Monitoring, Filter Waktu, Device Summary, dan Log Performa
+
 
   Background:
     Given pengguna sudah login ke sistem SyMon
@@ -18,12 +20,14 @@ Feature: Dashboard Monitoring, Filter Waktu, Device Summary, dan Log Performa
   # ----------------------------------------------------------
 
   # TC-DSH-01
+  @dashboard
   Scenario: Membuka halaman dashboard berhasil
     When pengguna masuk ke halaman dashboard
     Then halaman dashboard berhasil ditampilkan
     And tidak ada pesan error yang muncul
 
   # TC-DSH-02
+  @dashboard
   Scenario: Grafik monitoring ditampilkan di halaman dashboard
     Given pengguna berada di halaman dashboard
     When pengguna mengamati bagian grafik pada halaman dashboard
