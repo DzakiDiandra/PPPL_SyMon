@@ -7,6 +7,7 @@
 # Jumlah   : 11 TC
 # ============================================================
 
+@device_pt1
 Feature: Device Management (Tampilan, Tambah, Filter, Search) dan Peak Performance
 
   Background:
