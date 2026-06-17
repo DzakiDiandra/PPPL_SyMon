@@ -18,9 +18,6 @@ public class DeviceManagementPt1Steps {
     static LoginPage loginPage;
     static DashboardPage dashboardPage;
 
-    // =========================================================================
-    // HOOKS: MEMBUKA BROWSER HANYA SEKALI DI AWAL EKSEKUSI PENGUJIAN
-    // =========================================================================
     @BeforeAll
     public static void setDriver(){
         ChromeOptions options = new ChromeOptions();
@@ -41,9 +38,6 @@ public class DeviceManagementPt1Steps {
         }
     }
 
-    // =========================================================================
-    // STEP DEFINITIONS DENGAN PROTEKSI MULTI-SCENARIO
-    // =========================================================================
 
     @Given("pengguna sudah login sebagai Admin")
     public void penggunaSudahLoginSebagaiAdmin() {
@@ -90,9 +84,7 @@ public class DeviceManagementPt1Steps {
         Assert.assertTrue("Gagal memastikan pengguna berada di halaman Devices!", isDisplayed);
     }
 
-    // =========================================================================
     // TC-DS-01: TAMPILAN HALAMAN DEVICE
-    // =========================================================================
     @When("pengguna menekan tombol {string} di navbar")
     public void penggunaMenekanTombolDiNavbar(String buttonName) {
         if (buttonName.equalsIgnoreCase("Devices")) {
@@ -146,9 +138,7 @@ public class DeviceManagementPt1Steps {
         Assert.assertTrue("Input search tidak ditampilkan!", dashboardPage.isSearchInputVisible());
     }
 
-    // =========================================================================
     // TC-DS-02 & TC-DS-03: MODUL TAMBAH DEVICE
-    // =========================================================================
     @When("pengguna menekan tombol {string}")
     public void penggunaMenekanTombol(String buttonName) {
         if (buttonName.equalsIgnoreCase("Add Device")) {
@@ -208,9 +198,7 @@ public class DeviceManagementPt1Steps {
         Assert.assertTrue("Device '" + deviceName + "' tidak ditemukan dalam daftar!", isDeviceVisible);
     }
 
-    // =========================================================================
     // TC-DS-04 & TC-DS-05: MODUL FILTER OS
-    // =========================================================================
     @And("terdapat device dengan berbagai jenis OS")
     public void terdapatDeviceDenganBerbagaiJenisOS() {
         String totalDevices = dashboardPage.getTotalDevicesText();
@@ -257,9 +245,7 @@ public class DeviceManagementPt1Steps {
         Assert.assertTrue("Pesan bahwa device tidak ditemukan gagal ditampilkan!", isPesanMuncul);
     }
 
-    // =========================================================================
     // TC-DS-06 & TC-DS-07: MODUL SEARCH DEVICE
-    // =========================================================================
     @And("terdapat device dengan nama {string}")
     public void terdapatDeviceDenganNama(String deviceName) {
         System.out.println("Pre-kondisi: Device '" + deviceName + "' terdaftar.");
@@ -282,9 +268,7 @@ public class DeviceManagementPt1Steps {
         Assert.assertTrue("Device '" + expectedName + "' tidak ditemukan!", element.isDisplayed());
     }
 
-    // =========================================================================
     // MODUL IMPLEMENTASI: PEAK PERFORMANCE SUMMARY (TC-PEAK-01 s/d TC-PEAK-04)
-    // =========================================================================
     @When("pengguna melihat bagian performance summary")
     public void penggunaMelihatBagianPerformanceSummary() {
         Assert.assertTrue("Bagian Peak Performance Summary tidak terlihat!",
@@ -314,9 +298,7 @@ public class DeviceManagementPt1Steps {
     private String initialCpu;
     private String initialStorage;
 
-    // =========================================================================
     // TC-PEAK-04: FILTER TIME BASED (DAYS VS WEEKS)
-    // =========================================================================
     @When("pengguna mengganti pilihan filter waktu")
     public void penggunaMenggantiPilihanFilterWaktu() {
         initialRam = dashboardPage.getPeakRAMText();
