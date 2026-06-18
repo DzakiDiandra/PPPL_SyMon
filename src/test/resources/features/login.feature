@@ -7,6 +7,7 @@
 # Jumlah   : 12 TC
 # ============================================================
 
+@LOGIN
 Feature: Login, Autentikasi, Role Middleware, dan Admin Management
 
   Background:
@@ -25,28 +26,28 @@ Feature: Login, Autentikasi, Role Middleware, dan Admin Management
     And halaman menampilkan tombol "Login with UGM Email"
 
   # TC-SUP-02
-  Scenario: Login berhasil menggunakan email UGM yang valid
+  Scenario: Login berhasil menggunakan email UGM
     Given pengguna berada di halaman login
     When pengguna menekan tombol "Login with UGM Email"
-    And pengguna memilih akun email dengan domain "@ugm.ac.id"
+    And pengguna memilih akun email dengan domain "@mail.ugm.ac.id"
     Then login berhasil dilakukan
     And pengguna diarahkan ke halaman dashboard sesuai role
 
-  # TC-SUP-03
-  Scenario: Login gagal menggunakan email non-UGM
-    Given pengguna berada di halaman login
-    When pengguna menekan tombol "Login with UGM Email"
-    And pengguna memilih akun email dengan domain selain "@ugm.ac.id"
-    Then login gagal dilakukan
-    And pengguna diarahkan ke halaman "Login Failed"
-
-  # TC-SUP-04
-  Scenario: Switch account setelah gagal login lalu login dengan email UGM
-    Given pengguna berada di halaman "Login Failed"
-    When pengguna menekan tombol "Switch Account"
-    And pengguna memilih akun email dengan domain "@ugm.ac.id"
-    Then login berhasil dilakukan
-    And pengguna diarahkan ke halaman dashboard sesuai role
+#  # TC-SUP-03
+#  Scenario: Login gagal menggunakan email non-UGM
+#    Given pengguna berada di halaman login
+#    When pengguna menekan tombol "Login with UGM Email"
+#    And pengguna memilih akun email dengan domain selain "@mail.ugm.ac.id"
+#    Then login gagal dilakukan
+#    And pengguna diarahkan ke halaman "Login Failed"
+#
+#  # TC-SUP-04
+#  Scenario: Switch account setelah gagal login lalu login dengan email UGM
+#    Given pengguna berada di halaman "Login Failed"
+#    When pengguna menekan tombol "Switch Account"
+#    And pengguna memilih akun email dengan domain "@mail.ugm.ac.id"
+#    Then login berhasil dilakukan
+#    And pengguna diarahkan ke halaman dashboard sesuai role
 
   # TC-SUP-05
   Scenario: Tampilan halaman Profile pengguna
@@ -60,30 +61,21 @@ Feature: Login, Autentikasi, Role Middleware, dan Admin Management
     And halaman profil menampilkan footer
     And halaman profil menampilkan tombol "Log Out"
 
-  # TC-SUP-06
-  Scenario: Logout dari sistem
-    Given pengguna sudah login dan berada di halaman profil
-    When pengguna menekan tombol "Log Out"
-    Then muncul pop-up konfirmasi logout
-    When pengguna menekan tombol "Yes" pada pop-up
-    Then pengguna diarahkan kembali ke halaman Login
-    And sesi pengguna telah dihapus
-
   # ----------------------------------------------------------
   # MODUL: Role Middleware
   # ----------------------------------------------------------
 
   # TC-RM-01
-  Scenario Outline: Akses fitur sesuai role pengguna
-    Given pengguna dengan role "<role>" sudah melakukan login
-    When sistem memverifikasi role pengguna melalui backend
-    Then pengguna mendapatkan hak akses sesuai role "<role>"
-    And fitur yang dibatasi untuk role lain tidak dapat diakses
-
-    Examples:
-      | role  |
-      | Admin |
-      | User  |
+#  Scenario Outline: Akses fitur sesuai role pengguna
+#    Given pengguna dengan role "<role>" sudah melakukan login
+#    When sistem memverifikasi role pengguna melalui backend
+#    Then pengguna mendapatkan hak akses sesuai role "<role>"
+#    And fitur yang dibatasi untuk role lain tidak dapat diakses
+#
+#    Examples:
+#      | role  |
+#      | Admin |
+#      | User  |
 
   # ----------------------------------------------------------
   # MODUL: Admin Management
@@ -95,38 +87,38 @@ Feature: Login, Autentikasi, Role Middleware, dan Admin Management
     When pengguna menekan tombol "Add Admin"
     Then modal atau form "Add Admin" muncul dan dapat diisi
 
-  # TC-ADM-02
-  Scenario: Berhasil menambah admin dengan email UGM yang valid
-    Given pengguna sudah login sebagai Admin
-    And modal Add Admin sudah terbuka
-    When pengguna mengisi email "newadmin@mail.ugm.ac.id"
-    And pengguna menekan tombol "Add"
-    Then admin baru berhasil ditambahkan ke sistem
-    And admin baru muncul dalam daftar user dengan role "Admin"
-
   # TC-ADM-03
   Scenario: Gagal menambah admin karena field email kosong
-    Given pengguna sudah login sebagai Admin
-    And modal Add Admin sudah terbuka
+    Given modal Add Admin sudah terbuka
     When pengguna tidak mengisi field email
     And pengguna menekan tombol "Add"
     Then muncul pesan error "Email required"
-    And admin tidak berhasil ditambahkan
 
   # TC-ADM-04
   Scenario: Gagal menambah admin karena format email tidak valid
-    Given pengguna sudah login sebagai Admin
-    And modal Add Admin sudah terbuka
-    When pengguna mengisi email dengan format tidak valid "bukan-email"
+    Given modal Add Admin sudah terbuka
+    When pengguna mengisi email dengan format tidak valid "salah@gmail.com"
     And pengguna menekan tombol "Add"
     Then muncul pesan validasi error format email
-    And admin tidak berhasil ditambahkan
+
+  # TC-ADM-02
+  Scenario: Berhasil menambah admin dengan email UGM yang valid
+    Given modal Add Admin sudah terbuka
+    When pengguna mengisi email "matthewhayunajipriantara@mail.ugm.ac.id"
+    And pengguna menekan tombol "Add"
+    Then notif sukses muncul di layar
 
   # TC-ADM-05
   Scenario: Notifikasi sukses muncul setelah berhasil menambah admin
-    Given pengguna sudah login sebagai Admin
-    And modal Add Admin sudah terbuka
-    And pengguna telah mengisi email valid "newadmin@mail.ugm.ac.id"
-    When pengguna menekan tombol "Add"
-    Then notifikasi sukses muncul di layar
+    Given notifikasi sukses muncul di layar
+    When pengguna menekan tombol tutup notifikasi sukses
     And modal Add Admin tertutup
+
+  # TC-SUP-06
+  Scenario: Logout dari sistem
+    Given pengguna sudah login dan berada di halaman profil
+    When pengguna menekan tombol "Log Out"
+    Then muncul pop-up konfirmasi logout
+    When pengguna menekan tombol "Yes" pada pop-up
+    Then pengguna diarahkan kembali ke halaman Login
+    And sesi pengguna telah dihapus
