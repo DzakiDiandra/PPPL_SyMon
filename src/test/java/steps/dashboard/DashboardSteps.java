@@ -1,7 +1,8 @@
-package steps;
+package steps.dashboard;
 
 import io.cucumber.java.en.*;
 import org.junit.Assert;
+import steps.Hooks;
 
 public class DashboardSteps {
 
@@ -33,10 +34,10 @@ public class DashboardSteps {
         Assert.assertTrue(true);
     }
 
-    @Given("pengguna berada di halaman dashboard")
-    public void penggunaBeradaDiHalamanDashboard() {
-        System.out.println("Pengguna berada di halaman dashboard");
-    }
+//    @Given("pengguna berada di halaman dashboard")
+//    public void penggunaBeradaDiHalamanDashboard() {
+//        System.out.println("Pengguna berada di halaman dashboard");
+//    }
 
     @When("pengguna mengamati bagian grafik pada halaman dashboard")
     public void penggunaMengamatiBagianGrafikPadaHalamanDashboard() {

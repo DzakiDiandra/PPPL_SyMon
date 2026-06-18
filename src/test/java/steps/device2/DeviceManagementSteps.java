@@ -1,4 +1,4 @@
-package steps;
+package steps.device2;
 import static org.junit.jupiter.api.Assertions.*;
 
 import io.cucumber.java.Before;

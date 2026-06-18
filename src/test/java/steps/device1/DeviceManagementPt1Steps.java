@@ -1,4 +1,4 @@
-package steps;
+package steps.device1;
 
 import io.cucumber.java.BeforeAll;
 import io.cucumber.java.AfterAll;
@@ -37,7 +37,6 @@ public class DeviceManagementPt1Steps {
             driver.quit();
         }
     }
-
 
     @Given("pengguna sudah login sebagai Admin")
     public void penggunaSudahLoginSebagaiAdmin() {
